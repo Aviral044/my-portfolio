@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import RotatingText from "./components/RotatingText";
 import ClickSpark from "./components/ClickSpark";
 import PillNav from "./components/PillNav"; 
-import { Github, Linkedin, Mail, FileText, ExternalLink, Calendar } from "lucide-react";
+import { Mail, FileText, ExternalLink, Calendar } from "lucide-react";
+
+// Import Data
+import { experience, projects, items, skillCategories } from "./data";
 
 // --- HORIZONTAL SCROLL COMPONENT (DESKTOP) ---
 const HorizontalScrollSection = ({ items, color1, color2, scrollContainerRef }) => {
@@ -200,73 +203,8 @@ function App() {
   const scrollWrapperRef = useRef(null);
 
   const primaryBg = "#F6EDE4";
-  const color1 = "#262D65"; 
-  const color2 = "#E9364C";
-
-  const experience = [
-    { 
-      year: "2024 - Present", 
-      role: "Senior Frontend Engineer", 
-      company: "TechFlow Systems", 
-      desc: "Leading the migration to Next.js 14, improving site performance by 40%. Mentoring 3 junior developers." 
-    },
-    { 
-      year: "2022 - 2024", 
-      role: "Full Stack Developer", 
-      company: "Creative Pulse Agency", 
-      desc: "Built award-winning marketing sites using WebGL and GSAP. Managed backend architecture on Supabase." 
-    },
-    { 
-      year: "2020 - 2022", 
-      role: "UI/UX Designer & Dev", 
-      company: "Freelance", 
-      desc: "Delivered 15+ custom Shopify and React websites for diverse clients. Focused on accessibility and micro-interactions." 
-    },
-    { 
-      year: "2018 - 2020", 
-      role: "Junior Developer", 
-      company: "StartUp Inc", 
-      desc: "Assisted in building the core MVP and handling bug fixes for the React Native mobile app." 
-    },
-    { 
-      year: "2017 - 2018", 
-      role: "Frontend Intern", 
-      company: "Digital Dreams Studio", 
-      desc: "Converted PSD designs into responsive HTML/CSS. Learned the fundamentals of JavaScript and DOM manipulation." 
-    },
-    { 
-      year: "2016 - 2017", 
-      role: "Hackathon Organizer", 
-      company: "University Tech Club", 
-      desc: "Organized regional coding events. Built the event registration portal using vanilla JS and PHP." 
-    },
-    { 
-      year: "2013 - 2017", 
-      role: "B.S. Computer Science", 
-      company: "State University", 
-      desc: "Graduated with Honors. Specialized in Human-Computer Interaction (HCI) and Web Technologies." 
-    },
-  ];
-
-  const projects = [
-    { title: "E-Commerce Dashboard", desc: "A high-performance analytics dashboard.", tech: ["React", "Tailwind", "Node.js"], role: "Lead Frontend", link: "#" },
-    { title: "Health Tracker App", desc: "Accessible mobile-first web app for tracking daily vitals.", tech: ["TypeScript", "Next.js", "Supabase"], role: "Full Stack Developer", link: "#" },
-    { title: "Creative Agency Portfolio", desc: "Award-winning design implementation with complex animations.", tech: ["React", "GSAP", "WebGL"], role: "Creative Developer", link: "#" },
-  ];
-
-  const items = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Work", href: "#work" },
-    { label: "Contact", href: "#contact" },
-  ];
-
-  const skills = {
-    core: ["JavaScript (ES6+)", "React", "UX/UI Design", "Node.js"],
-    tools: ["VS Code", "Figma", "Git/GitHub", "Jira"],
-    soft: ["Agile Methodology", "Public Speaking", "Mentorship"],
-  };
+  const color1 = "#262D65"; // Navy
+  const color2 = "#E9364C"; // Red
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -278,7 +216,6 @@ function App() {
 
   return (
     <>
-      {/* Kept Scrollbar Hiding, removed Cursor hiding */}
       <style>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -298,12 +235,12 @@ function App() {
         </div>
       </div>
 
-      <div 
-        ref={scrollWrapperRef}
-        className={`h-screen w-full overflow-y-scroll no-scrollbar transition-opacity duration-1000 ${loading && !fadeOut ? 'opacity-0' : 'opacity-100'}`}
-        style={{ backgroundColor: primaryBg }}
-      >
-        <ClickSpark sparkColor={color2} sparkSize={10} sparkRadius={15} sparkCount={8} duration={400}>
+      <ClickSpark sparkColor={color2} sparkSize={10} sparkRadius={15} sparkCount={8} duration={400}>
+        <div 
+          ref={scrollWrapperRef}
+          className={`h-screen w-full overflow-y-scroll no-scrollbar transition-opacity duration-1000 ${loading && !fadeOut ? 'opacity-0' : 'opacity-100'}`}
+          style={{ backgroundColor: primaryBg }}
+        >
           <div className="w-full relative" style={{ color: color1 }}>
             
             {/* HERO */}
@@ -333,22 +270,48 @@ function App() {
             />
 
             {/* SKILLS */}
-            <section id="skills" className="w-full py-20 px-6 md:px-20 bg-opacity-50">
+            <section id="skills" className="w-full py-24 px-6 md:px-20 bg-opacity-50">
               <div className="max-w-6xl mx-auto">
-                <h2 className="text-5xl mb-12 text-center" style={{ fontFamily: "EVA-Matisse_Classic", color: color2 }}>Expertise</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="p-8 border rounded-xl" style={{ borderColor: color1 }}>
-                    <h3 className="text-xl font-bold mb-6 uppercase tracking-widest">Core Stack</h3>
-                    <ul className="space-y-3">{skills.core.map((s) => (<li key={s} className="flex items-center gap-2"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: color2 }}></span>{s}</li>))}</ul>
-                  </div>
-                  <div className="p-8 border rounded-xl" style={{ borderColor: color1 }}>
-                    <h3 className="text-xl font-bold mb-6 uppercase tracking-widest">Tools</h3>
-                    <ul className="space-y-3">{skills.tools.map((s) => (<li key={s} className="flex items-center gap-2"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: color2 }}></span>{s}</li>))}</ul>
-                  </div>
-                  <div className="p-8 border rounded-xl" style={{ borderColor: color1 }}>
-                    <h3 className="text-xl font-bold mb-6 uppercase tracking-widest">Soft Skills</h3>
-                    <ul className="space-y-3">{skills.soft.map((s) => (<li key={s} className="flex items-center gap-2"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: color2 }}></span>{s}</li>))}</ul>
-                  </div>
+                <h2 
+                  className="text-5xl mb-16 text-center" 
+                  style={{ fontFamily: "EVA-Matisse_Classic", color: color2 }}
+                >
+                  Expertise
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                  {skillCategories.map((category, idx) => (
+                    <div key={idx} className="flex flex-col gap-6">
+                      <h3 
+                        className="text-xl font-bold uppercase tracking-widest text-center md:text-left border-b pb-4" 
+                        style={{ borderColor: color1, color: color1 }}
+                      >
+                        {category.title}
+                      </h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        {category.items.map((skill, sIdx) => (
+                          <div 
+                            key={sIdx}
+                            className="group flex flex-col items-center justify-center p-4 rounded-xl border bg-white/40 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-lg cursor-default"
+                            style={{ borderColor: color1 }}
+                          >
+                            <div 
+                              className="text-3xl mb-3 transition-colors duration-300 group-hover:text-[#E9364C]"
+                              style={{ color: color1 }}
+                            >
+                              {skill.icon}
+                            </div>
+                            <span 
+                              className="text-sm font-semibold opacity-80" 
+                              style={{ color: color1 }}
+                            >
+                              {skill.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
@@ -389,8 +352,8 @@ function App() {
               <footer className="mt-20 opacity-40 text-sm">© {new Date().getFullYear()} Aviral Gupta. Built with React & lots of coffee.</footer>
             </section>
           </div>
-        </ClickSpark>
-      </div>
+        </div>
+      </ClickSpark>
     </>
   );
 }
