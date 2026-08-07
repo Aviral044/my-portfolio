@@ -6,17 +6,127 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* --- LOADER CSS --- */
+/* ============================================
+   RETRO PIXEL THEME — Sweetie-16 inspired palette
+   ============================================ */
+:root {
+  --px-bg: #1a1c2c;        /* night sky */
+  --px-bg-deep: #0c0d16;   /* near black */
+  --px-panel: #29366f;     /* indigo panel */
+  --px-panel-alt: #333c57; /* slate panel */
+  --px-text: #f4f4f4;      /* white */
+  --px-muted: #94b0c2;     /* dusty blue */
+  --px-yellow: #ffcd75;    /* coin gold */
+  --px-red: #b13e53;       /* crimson */
+  --px-orange: #ef7d57;    /* lava */
+  --px-cyan: #73eff7;      /* ice */
+  --px-green: #a7f070;     /* slime */
+}
+
+.font-pixel {
+  font-family: "Press Start 2P", monospace;
+}
+.font-retro {
+  font-family: "VT323", monospace;
+}
+
+/* Hard-edged panel with chunky pixel shadow */
+.pixel-panel {
+  border: 4px solid var(--px-bg-deep);
+  box-shadow: 6px 6px 0 var(--px-bg-deep);
+  image-rendering: pixelated;
+}
+.pixel-panel-sm {
+  border: 3px solid var(--px-bg-deep);
+  box-shadow: 4px 4px 0 var(--px-bg-deep);
+}
+
+/* Pixel button — presses down on hover/active */
+.pixel-btn {
+  border: 4px solid var(--px-bg-deep);
+  box-shadow: 5px 5px 0 var(--px-bg-deep);
+  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+  cursor: pointer;
+}
+.pixel-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--px-bg-deep);
+}
+.pixel-btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--px-bg-deep);
+}
+
+/* CRT scanline overlay */
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.12) 3px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+}
+
+/* Retro checkerboard (project "screens") */
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, var(--px-panel-alt) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--px-panel-alt) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--px-panel-alt) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--px-panel-alt) 75%);
+  background-size: 24px 24px;
+  background-position: 0 0, 0 12px, 12px -12px, -12px 0px;
+  background-color: var(--px-panel);
+}
+
+/* Blinking cursor / "insert coin" text */
+@keyframes px-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.blink {
+  animation: px-blink 1s steps(1) infinite;
+}
+
+/* Short-viewport safety: shrink the quest-log columns toward the
+   center line and compact the sticky title so they never collide */
+@media (min-width: 768px) and (max-height: 900px) {
+  .quest-title {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+  .quest-col-top {
+    transform: scale(0.78);
+    transform-origin: 50% 100%;
+  }
+  .quest-col-bottom {
+    transform: scale(0.78);
+    transform-origin: 50% 0%;
+  }
+}
+
+/* Floating pixel sprites in hero */
+@keyframes px-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.px-float {
+  animation: px-float 2.5s steps(6) infinite;
+}
+
+/* ============================================
+   PRELOADER (pixel Mario — recolored for dark bg)
+   ============================================ */
 .loader {
   width: fit-content;
   font-size: 17px;
-  font-family: monospace;
+  font-family: "Press Start 2P", monospace;
   line-height: 1.4;
   font-weight: bold;
   padding: 30px 2px 50px;
-  /* Changed #000 to #262D65 (Your Dark Blue) */
-  color: #262D65;
-  background: linear-gradient(#262D65 0 0) 0 0/100% 100% content-box padding-box no-repeat; 
+  color: #f4f4f4;
+  background: linear-gradient(#f4f4f4 0 0) 0 0/100% 100% content-box padding-box no-repeat;
   position: relative;
   overflow: hidden;
   animation: l10-0 2s infinite cubic-bezier(1,175,.5,175);
@@ -66,118 +176,19 @@
   80%,100% { transform:translateY(-260%); }
 }
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--px-panel-alt);
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--px-bg);
+    color: var(--px-text);
+  }
+  ::selection {
+    background: var(--px-yellow);
+    color: var(--px-bg-deep);
   }
 }
