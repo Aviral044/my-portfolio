@@ -304,7 +304,7 @@ const HorizontalScrollSection = ({ items, scrollContainerRef }) => {
   }, [items.length, scrollContainerRef]);
 
   return (
-    <div ref={sectionRef} className="relative" style={{ height: `${Math.max(180, items.length * 60)}vh` }}>
+    <div ref={sectionRef} className="relative" style={{ height: `${Math.max(220, items.length * 70)}vh` }}>
       <div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: C.bg }}>
         <div className="quest-title absolute top-20 lg:top-24 left-1/2 -translate-x-1/2 z-30 text-center whitespace-nowrap">
           <h2
