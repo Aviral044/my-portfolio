@@ -48,6 +48,165 @@ const PixelHeart = ({ size = 28, color = C.red, className = "", style = {} }) =>
   </svg>
 );
 
+// --- PIXEL BONFIRE SPRITE (3-frame flicker, see .bf-f* in index.css) ---
+const PixelBonfire = ({ size = 56, className = "", style = {} }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 14"
+    shapeRendering="crispEdges"
+    className={className}
+    style={style}
+  >
+    {/* Flame frame 1 — tall center */}
+    <g className="bf-f1">
+      <g fill={C.red}>
+        <rect x="5" y="8" width="6" height="3" />
+        <rect x="6" y="6" width="4" height="2" />
+        <rect x="7" y="4" width="2" height="2" />
+        <rect x="7" y="3" width="1" height="1" />
+      </g>
+      <g fill={C.orange}>
+        <rect x="6" y="8" width="4" height="3" />
+        <rect x="7" y="6" width="2" height="2" />
+      </g>
+      <rect x="7" y="9" width="2" height="2" fill={C.yellow} />
+    </g>
+
+    {/* Flame frame 2 — leaning left, spark right */}
+    <g className="bf-f2">
+      <g fill={C.red}>
+        <rect x="5" y="8" width="6" height="3" />
+        <rect x="5" y="6" width="3" height="2" />
+        <rect x="6" y="4" width="2" height="2" />
+        <rect x="5" y="3" width="1" height="1" />
+      </g>
+      <g fill={C.orange}>
+        <rect x="6" y="8" width="3" height="3" />
+        <rect x="6" y="6" width="2" height="2" />
+      </g>
+      <rect x="6" y="9" width="2" height="2" fill={C.yellow} />
+      <rect x="10" y="4" width="1" height="1" fill={C.yellow} />
+    </g>
+
+    {/* Flame frame 3 — leaning right, spark left */}
+    <g className="bf-f3">
+      <g fill={C.red}>
+        <rect x="5" y="8" width="6" height="3" />
+        <rect x="8" y="6" width="3" height="2" />
+        <rect x="8" y="4" width="2" height="2" />
+        <rect x="10" y="3" width="1" height="1" />
+      </g>
+      <g fill={C.orange}>
+        <rect x="7" y="8" width="3" height="3" />
+        <rect x="8" y="6" width="2" height="2" />
+      </g>
+      <rect x="8" y="9" width="2" height="2" fill={C.yellow} />
+      <rect x="4" y="5" width="1" height="1" fill={C.orange} />
+    </g>
+
+    {/* Logs (static) */}
+    <g fill="#5d275d">
+      <rect x="4" y="11" width="8" height="1" />
+      <rect x="2" y="12" width="12" height="1" />
+    </g>
+    <g fill={C.bgDeep}>
+      <rect x="2" y="11" width="2" height="1" />
+      <rect x="12" y="11" width="2" height="1" />
+    </g>
+  </svg>
+);
+
+// --- PIXEL COIN SPRITE (3-frame spin) ---
+const PixelCoin = ({ size = 24, className = "", style = {} }) => (
+  <svg width={size} height={size} viewBox="0 0 8 8" shapeRendering="crispEdges" className={className} style={style}>
+    {/* facing */}
+    <g className="bf-f1">
+      <g fill={C.yellow}>
+        <rect x="2" y="0" width="4" height="1" />
+        <rect x="1" y="1" width="6" height="1" />
+        <rect x="0" y="2" width="8" height="4" />
+        <rect x="1" y="6" width="6" height="1" />
+        <rect x="2" y="7" width="4" height="1" />
+      </g>
+      <rect x="2" y="2" width="1" height="2" fill={C.text} />
+      <rect x="5" y="2" width="2" height="3" fill={C.orange} />
+      <rect x="4" y="5" width="2" height="1" fill={C.orange} />
+    </g>
+    {/* edge-on */}
+    <g className="bf-f2">
+      <g fill={C.yellow}>
+        <rect x="3" y="0" width="2" height="1" />
+        <rect x="2" y="1" width="4" height="6" />
+        <rect x="3" y="7" width="2" height="1" />
+      </g>
+      <rect x="4" y="1" width="2" height="6" fill={C.orange} />
+    </g>
+    {/* thin */}
+    <g className="bf-f3">
+      <rect x="3" y="0" width="2" height="8" fill={C.orange} />
+      <rect x="3" y="1" width="1" height="6" fill={C.yellow} />
+    </g>
+  </svg>
+);
+
+// --- PIXEL TWINKLE SPRITE (2-frame star, recolorable) ---
+const PixelTwinkle = ({ size = 20, color = C.cyan, className = "", style = {} }) => (
+  <svg width={size} height={size} viewBox="0 0 7 7" shapeRendering="crispEdges" className={className} style={style}>
+    <g className="px2-f1" fill={color}>
+      <rect x="3" y="0" width="1" height="7" />
+      <rect x="0" y="3" width="7" height="1" />
+      <rect x="1" y="1" width="1" height="1" />
+      <rect x="5" y="1" width="1" height="1" />
+      <rect x="1" y="5" width="1" height="1" />
+      <rect x="5" y="5" width="1" height="1" />
+    </g>
+    <g className="px2-f2" fill={color}>
+      <rect x="3" y="2" width="1" height="3" />
+      <rect x="2" y="3" width="3" height="1" />
+    </g>
+  </svg>
+);
+
+// --- PIXEL SLIME SPRITE (2-frame squash & stretch) ---
+const PixelSlime = ({ size = 40, color = C.green, className = "", style = {} }) => (
+  <svg width={size} height={(size * 7) / 10} viewBox="0 0 10 7" shapeRendering="crispEdges" className={className} style={style}>
+    {/* tall */}
+    <g className="px2-f1">
+      <g fill={color}>
+        <rect x="3" y="0" width="4" height="1" />
+        <rect x="2" y="1" width="6" height="1" />
+        <rect x="1" y="2" width="8" height="4" />
+      </g>
+      <rect x="3" y="3" width="1" height="2" fill={C.bgDeep} />
+      <rect x="6" y="3" width="1" height="2" fill={C.bgDeep} />
+    </g>
+    {/* squashed */}
+    <g className="px2-f2">
+      <g fill={color}>
+        <rect x="3" y="2" width="4" height="1" />
+        <rect x="1" y="3" width="8" height="1" />
+        <rect x="0" y="4" width="10" height="2" />
+      </g>
+      <rect x="3" y="4" width="1" height="1" fill={C.bgDeep} />
+      <rect x="6" y="4" width="1" height="1" fill={C.bgDeep} />
+    </g>
+  </svg>
+);
+
+// --- PIXEL CLOUD SPRITE (static, pair with px-float) ---
+const PixelCloud = ({ size = 70, className = "", style = {} }) => (
+  <svg width={size} height={(size * 6) / 14} viewBox="0 0 14 6" shapeRendering="crispEdges" className={className} style={style}>
+    <g fill={C.panelAlt}>
+      <rect x="4" y="0" width="4" height="1" />
+      <rect x="2" y="1" width="8" height="1" />
+      <rect x="1" y="2" width="11" height="2" />
+      <rect x="0" y="4" width="14" height="2" />
+    </g>
+    <rect x="4" y="1" width="2" height="1" fill={C.muted} opacity="0.4" />
+  </svg>
+);
+
 // --- SECTION TITLE ---
 const SectionTitle = ({ children, sub }) => (
   <div className="text-center mb-16">
@@ -67,22 +226,19 @@ const SectionTitle = ({ children, sub }) => (
 
 // --- TIMELINE CARD ---
 const QuestCard = ({ job }) => (
-  <div className="pixel-panel w-80 p-6 text-center" style={{ backgroundColor: C.panel }}>
+  <div className="pixel-panel w-96 p-9 text-center" style={{ backgroundColor: C.panel }}>
     <div
-      className="font-pixel text-[9px] flex justify-center items-center gap-2 mb-3 tracking-wider"
+      className="font-pixel text-[11px] flex justify-center items-center gap-2 mb-4 tracking-wider"
       style={{ color: C.yellow }}
     >
-      <Calendar size={12} /> {job.year}
+      <Calendar size={14} /> {job.year}
     </div>
-    <h3 className="font-pixel text-sm leading-relaxed mb-2" style={{ color: C.cyan }}>
+    <h3 className="font-pixel text-base leading-relaxed mb-3" style={{ color: C.cyan }}>
       {job.role}
     </h3>
-    <h4 className="font-retro text-xl mb-2" style={{ color: C.orange }}>
+    <h4 className="font-retro text-2xl" style={{ color: C.orange }}>
       {job.company}
     </h4>
-    <p className="font-retro text-xl leading-snug" style={{ color: C.text, opacity: 0.85 }}>
-      {job.desc}
-    </p>
   </div>
 );
 
@@ -103,9 +259,10 @@ const HorizontalScrollSection = ({ items, scrollContainerRef }) => {
       const viewportWidth = container.clientWidth;
       const scrollTop = container.scrollTop;
 
-      const buffer = 300;
-      const start = sectionTop + buffer;
-      const end = sectionTop + sectionHeight - viewportHeight - buffer;
+      const startDelay = 700; // extra scroll before the cards start moving
+      const endBuffer = 300;
+      const start = sectionTop + startDelay;
+      const end = sectionTop + sectionHeight - viewportHeight - endBuffer;
 
       const contentWidth = items.length * 500;
       const leftPadding = viewportWidth * 0.2;
@@ -134,7 +291,7 @@ const HorizontalScrollSection = ({ items, scrollContainerRef }) => {
   }, [items.length, scrollContainerRef]);
 
   return (
-    <div ref={sectionRef} className="relative h-[450vh]">
+    <div ref={sectionRef} className="relative" style={{ height: `${Math.max(200, items.length * 65)}vh` }}>
       <div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: C.bg }}>
         <div className="quest-title absolute top-20 lg:top-24 left-1/2 -translate-x-1/2 z-30 text-center whitespace-nowrap">
           <h2
@@ -230,22 +387,19 @@ const TimelineSection = ({ items, scrollContainerRef }) => {
                 className="absolute -left-[7px] top-6 w-4 h-4 z-10"
                 style={{ backgroundColor: C.yellow, border: `3px solid ${C.bgDeep}` }}
               ></div>
-              <div className="pixel-panel p-6 relative z-10" style={{ backgroundColor: C.panel }}>
+              <div className="pixel-panel p-8 relative z-10" style={{ backgroundColor: C.panel }}>
                 <div
-                  className="font-pixel text-[9px] flex items-center gap-2 mb-3 tracking-wider"
+                  className="font-pixel text-[10px] flex items-center gap-2 mb-3 tracking-wider"
                   style={{ color: C.yellow }}
                 >
-                  <Calendar size={12} /> {job.year}
+                  <Calendar size={13} /> {job.year}
                 </div>
-                <h3 className="font-pixel text-sm leading-relaxed mb-2" style={{ color: C.cyan }}>
+                <h3 className="font-pixel text-base leading-relaxed mb-2" style={{ color: C.cyan }}>
                   {job.role}
                 </h3>
-                <h4 className="font-retro text-xl mb-2" style={{ color: C.orange }}>
+                <h4 className="font-retro text-2xl" style={{ color: C.orange }}>
                   {job.company}
                 </h4>
-                <p className="font-retro text-lg leading-snug" style={{ color: C.text, opacity: 0.85 }}>
-                  {job.desc}
-                </p>
               </div>
             </div>
           ))}
@@ -317,6 +471,9 @@ function App() {
             {/* HERO */}
             <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4 pt-24 pb-36 md:pt-28 md:pb-20">
               {/* Floating pixel sprites */}
+              <PixelCloud size={90} className="px-float absolute top-[10%] left-[22%] opacity-50 hidden md:block" style={{ animationDelay: "0.6s" }} />
+              <PixelCloud size={60} className="px-float absolute top-[22%] right-[30%] opacity-40 hidden md:block" style={{ animationDelay: "1.6s" }} />
+
               <PixelHeart
                 size={26}
                 className="px-float absolute top-[18%] left-[12%] opacity-70"
@@ -328,18 +485,35 @@ function App() {
                 className="px-float absolute top-[30%] right-[15%] opacity-60"
                 style={{ animationDelay: "0.8s" }}
               />
-              <span
-                className="px-float absolute top-[60%] left-[18%] font-pixel text-xl opacity-50 hidden md:block"
-                style={{ color: C.cyan, animationDelay: "0.4s" }}
-              >
-                ✦
-              </span>
+
+              <PixelCoin size={26} className="px-float absolute top-[14%] right-[10%] opacity-90" style={{ animationDelay: "0.3s" }} />
+              <PixelCoin size={18} className="absolute top-[42%] left-[7%] opacity-80 hidden md:block" style={{ "--d": "0.25s" }} />
+              <PixelCoin size={20} className="px-float absolute bottom-[34%] right-[8%] opacity-80 hidden md:block" style={{ animationDelay: "1s", "--d": "0.5s" }} />
+
+              <PixelTwinkle size={20} className="absolute top-[60%] left-[18%] opacity-70" />
+              <PixelTwinkle size={14} color={C.yellow} className="absolute top-[24%] left-[32%] opacity-60 hidden md:block" style={{ "--d": "0.4s" }} />
+              <PixelTwinkle size={16} color={C.text} className="absolute top-[52%] right-[24%] opacity-50 hidden md:block" style={{ "--d": "0.2s" }} />
+              <PixelTwinkle size={12} color={C.green} className="absolute bottom-[18%] left-[38%] opacity-60 hidden md:block" style={{ "--d": "0.6s" }} />
+
+              <PixelSlime size={44} className="absolute bottom-[14%] right-[14%] opacity-90" style={{ "--d": "0.3s" }} />
+              <PixelSlime size={26} color={C.cyan} className="absolute bottom-[24%] right-[26%] opacity-70 hidden lg:block" style={{ "--d": "0.7s" }} />
+
               <span
                 className="px-float absolute top-[68%] right-[20%] font-pixel text-2xl opacity-50 hidden md:block"
                 style={{ color: C.green, animationDelay: "1.2s" }}
               >
                 +
               </span>
+
+              <PixelBonfire
+                size={90}
+                className="absolute bottom-[13%] left-[8%] opacity-90 md:left-[12%]"
+              />
+              <PixelBonfire
+                size={44}
+                className="absolute top-[16%] right-[38%] opacity-60 hidden lg:block"
+                style={{ "--d": "0.35s" }}
+              />
 
               <p
                 className="font-pixel text-[10px] md:text-sm mb-8 tracking-widest"

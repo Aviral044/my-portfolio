@@ -1,11 +1,9 @@
 // src/data.js
-import { 
-  Github, Linkedin, Mail, FileText, ExternalLink, Calendar, 
-  Users, Mic, Brain, Terminal 
-} from "lucide-react";
-import { 
-  SiReact, SiJavascript, SiNodedotjs, SiTailwindcss, 
-  SiFigma, SiGit, SiJira, SiNextdotjs, SiTypescript 
+import { Users, Brain, Terminal, GitBranch } from "lucide-react";
+import {
+  SiOpenjdk, SiPython, SiSpringboot, SiDotnet, SiReact, SiNodedotjs,
+  SiAmazonwebservices, SiDocker, SiKubernetes, SiApachekafka, SiNeo4J,
+  SiPostgresql, SiLangchain, SiGit, SiJira,
 } from "react-icons/si";
 
 // --- NAV ITEMS ---
@@ -17,88 +15,88 @@ export const items = [
   { label: "Contact", href: "#contact" },
 ];
 
-// --- EXPERIENCE DATA ---
+// --- EXPERIENCE DATA (oldest first — the timeline reads left to right) ---
 export const experience = [
-  { 
-    year: "2024 - Present", 
-    role: "Senior Frontend Engineer", 
-    company: "TechFlow Systems", 
-    desc: "Leading the migration to Next.js 14, improving site performance by 40%. Mentoring 3 junior developers." 
+  {
+    year: "Jul 2019 - Jul 2023",
+    role: "B.Tech. Electronics & Comm.",
+    company: "Manipal Institute of Technology",
   },
-  { 
-    year: "2022 - 2024", 
-    role: "Full Stack Developer", 
-    company: "Creative Pulse Agency", 
-    desc: "Built award-winning marketing sites using WebGL and GSAP. Managed backend architecture on Supabase." 
+  {
+    year: "Jan 2023 - Jun 2023",
+    role: "Software Engineer Intern",
+    company: "UBS",
   },
-  { 
-    year: "2020 - 2022", 
-    role: "UI/UX Designer & Dev", 
-    company: "Freelance", 
-    desc: "Delivered 15+ custom Shopify and React websites for diverse clients. Focused on accessibility and micro-interactions." 
+  {
+    year: "Aug 2023 - Aug 2024",
+    role: "Software Engineer",
+    company: "UBS",
   },
-  { 
-    year: "2018 - 2020", 
-    role: "Junior Developer", 
-    company: "StartUp Inc", 
-    desc: "Assisted in building the core MVP and handling bug fixes for the React Native mobile app." 
-  },
-  { 
-    year: "2017 - 2018", 
-    role: "Frontend Intern", 
-    company: "Digital Dreams Studio", 
-    desc: "Converted PSD designs into responsive HTML/CSS. Learned the fundamentals of JavaScript and DOM manipulation." 
-  },
-  { 
-    year: "2016 - 2017", 
-    role: "Hackathon Organizer", 
-    company: "University Tech Club", 
-    desc: "Organized regional coding events. Built the event registration portal using vanilla JS and PHP." 
-  },
-  { 
-    year: "2013 - 2017", 
-    role: "B.S. Computer Science", 
-    company: "State University", 
-    desc: "Graduated with Honors. Specialized in Human-Computer Interaction (HCI) and Web Technologies." 
+  {
+    year: "Aug 2024 - May 2026",
+    role: "M.S. Computer Science",
+    company: "Arizona State University",
   },
 ];
 
 // --- PROJECTS DATA ---
 export const projects = [
-  { title: "E-Commerce Dashboard", desc: "A high-performance analytics dashboard.", tech: ["React", "Tailwind", "Node.js"], role: "Lead Frontend", link: "#" },
-  { title: "Health Tracker App", desc: "Accessible mobile-first web app for tracking daily vitals.", tech: ["TypeScript", "Next.js", "Supabase"], role: "Full Stack Developer", link: "#" },
-  { title: "Creative Agency Portfolio", desc: "Award-winning design implementation with complex animations.", tech: ["React", "GSAP", "WebGL"], role: "Creative Developer", link: "#" },
+  {
+    title: "Scout: Corrective RAG Agent",
+    desc: "An agentic system using a cyclic state machine to route between vector context and live web search based on real-time relevance scoring, with a Hallucination Grader node that verifies answer grounding.",
+    tech: ["LangGraph", "Groq", "ChromaDB", "Python"],
+    role: "Solo Developer",
+    link: "#",
+  },
+  {
+    title: "Graph Streaming Pipeline",
+    desc: "A distributed pipeline on Kubernetes streaming NYC Taxi data into a Neo4j graph database, orchestrated with custom Docker images and Helm charts. Ran PageRank and BFS for node significance analysis.",
+    tech: ["Kubernetes", "Kafka", "Neo4j", "Helm", "Docker"],
+    role: "Solo Developer",
+    link: "#",
+  },
+  {
+    title: "EC2 Auto-Scaling Face Rec.",
+    desc: "A cost-efficient distributed system that triggers EC2 auto-scaling off CloudWatch metrics and SQS queue depth, serving FaceNet models at sub-1.2s latency for 1,000 concurrent requests.",
+    tech: ["AWS EC2", "AWS SQS", "Lambda", "Docker", "Python"],
+    role: "Solo Developer",
+    link: "#",
+  },
 ];
 
 // --- SKILLS DATA ---
 export const skillCategories = [
   {
-    title: "Core Stack",
+    title: "Languages & Frameworks",
     items: [
+      { name: "Java", icon: <SiOpenjdk /> },
+      { name: "Spring Boot", icon: <SiSpringboot /> },
+      { name: "Python", icon: <SiPython /> },
+      { name: ".NET / C#", icon: <SiDotnet /> },
       { name: "React", icon: <SiReact /> },
-      { name: "Next.js", icon: <SiNextdotjs /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "JavaScript", icon: <SiJavascript /> },
-      { name: "Tailwind", icon: <SiTailwindcss /> },
-    ],
-  },
-  {
-    title: "Backend & Tools",
-    items: [
       { name: "Node.js", icon: <SiNodedotjs /> },
-      { name: "Git/GitHub", icon: <SiGit /> },
-      { name: "Figma", icon: <SiFigma /> },
-      { name: "Terminal", icon: <Terminal /> },
-      { name: "Jira", icon: <SiJira /> },
     ],
   },
   {
-    title: "Soft Skills",
+    title: "Cloud & Data",
     items: [
-      { name: "Leadership", icon: <Users /> },
-      { name: "Public Speaking", icon: <Mic /> },
-      { name: "Prob. Solving", icon: <Brain /> },
-      { name: "Mentorship", icon: <Users /> },
+      { name: "AWS", icon: <SiAmazonwebservices /> },
+      { name: "Docker", icon: <SiDocker /> },
+      { name: "Kubernetes", icon: <SiKubernetes /> },
+      { name: "Kafka", icon: <SiApachekafka /> },
+      { name: "Neo4j", icon: <SiNeo4J /> },
+      { name: "PostgreSQL", icon: <SiPostgresql /> },
+    ],
+  },
+  {
+    title: "AI & Workflow",
+    items: [
+      { name: "LangChain", icon: <SiLangchain /> },
+      { name: "LangGraph", icon: <Brain /> },
+      { name: "Git/GitHub", icon: <SiGit /> },
+      { name: "CI/CD", icon: <GitBranch /> },
+      { name: "Jira", icon: <SiJira /> },
+      { name: "Agile/Scrum", icon: <Users /> },
     ],
   },
 ];

@@ -106,6 +106,24 @@
   }
 }
 
+/* 3-frame pixel sprites (bonfire, coin…) — frames shown in sequence.
+   Set --d on the sprite to phase-shift the whole cycle. */
+@keyframes px3-cycle {
+  0%, 32% { opacity: 1; }
+  33%, 100% { opacity: 0; }
+}
+.bf-f1 { animation: px3-cycle 0.75s steps(1) infinite; animation-delay: var(--d, 0s); }
+.bf-f2 { opacity: 0; animation: px3-cycle 0.75s steps(1) infinite; animation-delay: calc(var(--d, 0s) + 0.25s); }
+.bf-f3 { opacity: 0; animation: px3-cycle 0.75s steps(1) infinite; animation-delay: calc(var(--d, 0s) + 0.5s); }
+
+/* 2-frame pixel sprites (twinkle, slime squash) */
+@keyframes px2-toggle {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.px2-f1 { animation: px2-toggle 0.8s steps(1) infinite; animation-delay: var(--d, 0s); }
+.px2-f2 { opacity: 0; animation: px2-toggle 0.8s steps(1) infinite; animation-delay: calc(var(--d, 0s) + 0.4s); }
+
 /* Floating pixel sprites in hero */
 @keyframes px-float {
   0%, 100% { transform: translateY(0); }
