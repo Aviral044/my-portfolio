@@ -245,13 +245,20 @@ const QuestCard = ({ job }) => (
 // --- HORIZONTAL SCROLL COMPONENT (DESKTOP) ---
 const HorizontalScrollSection = ({ items, scrollContainerRef }) => {
   const sectionRef = useRef(null);
-  const [translateX, setTranslateX] = useState(0);
+  const trackRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const container = scrollContainerRef.current;
+    const container = scrollContainerRef.current;
+    const track = trackRef.current;
+    if (!container || !track) return;
+
+    let target = 0;
+    let current = 0;
+    let rafId;
+
+    const computeTarget = () => {
       const section = sectionRef.current;
-      if (!container || !section) return;
+      if (!section) return;
 
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
@@ -260,38 +267,44 @@ const HorizontalScrollSection = ({ items, scrollContainerRef }) => {
       const scrollTop = container.scrollTop;
 
       const startDelay = 700; // extra scroll before the cards start moving
-      const endBuffer = 300;
+      const endBuffer = 60; // keep small — anything left here is dead scrolling before the section unpins
       const start = sectionTop + startDelay;
       const end = sectionTop + sectionHeight - viewportHeight - endBuffer;
 
       const contentWidth = items.length * 500;
       const leftPadding = viewportWidth * 0.2;
-      const rightBuffer = 200;
+      const rightBuffer = 80;
       const maxTranslate = (contentWidth + leftPadding) - viewportWidth + rightBuffer;
       const safeTranslate = Math.max(0, maxTranslate);
 
-      if (scrollTop > start && scrollTop < end) {
-        const progress = (scrollTop - start) / (end - start);
-        setTranslateX(-progress * safeTranslate);
-      } else if (scrollTop <= start) {
-        setTranslateX(0);
-      } else if (scrollTop >= end) {
-        setTranslateX(-safeTranslate);
-      }
+      const progress = Math.min(1, Math.max(0, (scrollTop - start) / (end - start)));
+      target = -progress * safeTranslate;
     };
 
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-      handleScroll();
-    }
+    // Ease the track toward the scroll target each frame instead of
+    // snapping on every scroll event — this is what makes it smooth.
+    const loop = () => {
+      current += (target - current) * 0.1;
+      if (Math.abs(target - current) < 0.5) current = target;
+      track.style.transform = `translate3d(${current}px, 0, 0)`;
+      rafId = requestAnimationFrame(loop);
+    };
+
+    computeTarget();
+    current = target; // start settled, no fly-in on mount
+    container.addEventListener("scroll", computeTarget, { passive: true });
+    window.addEventListener("resize", computeTarget);
+    rafId = requestAnimationFrame(loop);
+
     return () => {
-      if (container) container.removeEventListener("scroll", handleScroll);
+      container.removeEventListener("scroll", computeTarget);
+      window.removeEventListener("resize", computeTarget);
+      cancelAnimationFrame(rafId);
     };
   }, [items.length, scrollContainerRef]);
 
   return (
-    <div ref={sectionRef} className="relative" style={{ height: `${Math.max(200, items.length * 65)}vh` }}>
+    <div ref={sectionRef} className="relative" style={{ height: `${Math.max(180, items.length * 60)}vh` }}>
       <div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: C.bg }}>
         <div className="quest-title absolute top-20 lg:top-24 left-1/2 -translate-x-1/2 z-30 text-center whitespace-nowrap">
           <h2
@@ -306,8 +319,9 @@ const HorizontalScrollSection = ({ items, scrollContainerRef }) => {
         </div>
 
         <div
+          ref={trackRef}
           className="absolute top-0 left-0 h-full flex items-center will-change-transform"
-          style={{ transform: `translateX(${translateX}px)`, paddingLeft: "20vw" }}
+          style={{ paddingLeft: "20vw" }}
         >
           {/* CENTER LINE (dashed pixel track) */}
           <div
