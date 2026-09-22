@@ -1,0 +1,66 @@
+name: Site content agent
+
+# Adds one project or experience entry from an issue, then opens a PR.
+# Review the Vercel preview on that PR before merging.
+on:
+  issues:
+    types: [opened]
+
+# No ambient permissions; the job below grants only what it needs.
+permissions: {}
+
+concurrency:
+  group: site-agent-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  agent:
+    # Only the repo owner can trigger this, and only via the two content
+    # labels. The action independently re-checks that the actor has write
+    # access, so this is defence in depth for when the repo is public.
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      (contains(github.event.issue.labels.*.name, 'new-project') ||
+      contains(github.event.issue.labels.*.name, 'new-experience'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          # The action configures git with its own token before pushing.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run content agent
+        uses: anomalyco/opencode/github@v1.18.32
+        env:
+          # The action's installer defaults to the latest CLI; pin it so a
+          # new opencode release cannot change behaviour under us.
+          VERSION: 1.18.32
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Provide the key matching whichever provider OPENCODE_MODEL names.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        with:
+          # Repo variable, e.g. anthropic/claude-sonnet-5. Change the model or
+          # provider in Settings -> Variables; no edit to this file needed.
+          model: ${{ vars.OPENCODE_MODEL }}
+          use_github_token: true
+          # The issue number is the only thing interpolated here. The agent
+          # reads the title and body itself via gh, so untrusted text never
+          # reaches this YAML.
+          prompt: >-
+            Follow the rules in AGENTS.md in the repository root.
+            The request is issue #${{ github.event.issue.number }};
+            read it with `gh issue view ${{ github.event.issue.number }}`.
