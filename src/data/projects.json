@@ -1,0 +1,23 @@
+[
+  {
+    "id": "scout-corrective-rag-agent",
+    "name": "Scout: Corrective RAG Agent",
+    "description": "An agentic system using a cyclic state machine to route between vector context and live web search based on real-time relevance scoring, with a Hallucination Grader node that verifies answer grounding.",
+    "tech": ["LangGraph", "Groq", "ChromaDB", "Python"],
+    "role": "Solo Developer"
+  },
+  {
+    "id": "graph-streaming-pipeline",
+    "name": "Graph Streaming Pipeline",
+    "description": "A distributed pipeline on Kubernetes streaming NYC Taxi data into a Neo4j graph database, orchestrated with custom Docker images and Helm charts. Ran PageRank and BFS for node significance analysis.",
+    "tech": ["Kubernetes", "Kafka", "Neo4j", "Helm", "Docker"],
+    "role": "Solo Developer"
+  },
+  {
+    "id": "ec2-auto-scaling-face-rec",
+    "name": "EC2 Auto-Scaling Face Rec.",
+    "description": "A cost-efficient distributed system that triggers EC2 auto-scaling off CloudWatch metrics and SQS queue depth, serving FaceNet models at sub-1.2s latency for 1,000 concurrent requests.",
+    "tech": ["AWS EC2", "AWS SQS", "Lambda", "Docker", "Python"],
+    "role": "Solo Developer"
+  }
+]

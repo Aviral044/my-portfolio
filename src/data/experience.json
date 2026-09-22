@@ -1,0 +1,34 @@
+[
+  {
+    "id": "manipal-btech-ece",
+    "kind": "education",
+    "role": "B.Tech. Electronics & Comm.",
+    "company": "Manipal Institute of Technology",
+    "startDate": "2019-07",
+    "endDate": "2023-07"
+  },
+  {
+    "id": "ubs-software-engineer-intern",
+    "kind": "work",
+    "role": "Software Engineer Intern",
+    "company": "UBS",
+    "startDate": "2023-01",
+    "endDate": "2023-06"
+  },
+  {
+    "id": "ubs-software-engineer",
+    "kind": "work",
+    "role": "Software Engineer",
+    "company": "UBS",
+    "startDate": "2023-08",
+    "endDate": "2024-08"
+  },
+  {
+    "id": "asu-ms-cs",
+    "kind": "education",
+    "role": "M.S. Computer Science",
+    "company": "Arizona State University",
+    "startDate": "2024-08",
+    "endDate": "2026-05"
+  }
+]

@@ -6,6 +6,7 @@ import { Mail, FileText, ExternalLink, Calendar } from "lucide-react";
 
 // Import Data
 import { experience, projects, items, skillCategories } from "./data";
+import { formatRange } from "./data/format";
 
 // --- PALETTE (Sweetie-16 inspired) ---
 const C = {
@@ -231,7 +232,7 @@ const QuestCard = ({ job }) => (
       className="font-pixel text-[11px] flex justify-center items-center gap-2 mb-4 tracking-wider"
       style={{ color: C.yellow }}
     >
-      <Calendar size={14} /> {job.year}
+      <Calendar size={14} /> {formatRange(job.startDate, job.endDate)}
     </div>
     <h3 className="font-pixel text-base leading-relaxed mb-3" style={{ color: C.cyan }}>
       {job.role}
@@ -406,7 +407,7 @@ const TimelineSection = ({ items, scrollContainerRef }) => {
                   className="font-pixel text-[10px] flex items-center gap-2 mb-3 tracking-wider"
                   style={{ color: C.yellow }}
                 >
-                  <Calendar size={13} /> {job.year}
+                  <Calendar size={13} /> {formatRange(job.startDate, job.endDate)}
                 </div>
                 <h3 className="font-pixel text-base leading-relaxed mb-2" style={{ color: C.cyan }}>
                   {job.role}
@@ -624,7 +625,7 @@ function App() {
                   {projects.map((project, index) => (
                     <a
                       key={index}
-                      href={project.link}
+                      href={project.liveUrl ?? project.repoUrl ?? "#"}
                       className="group cursor-pointer pixel-panel p-4 block no-underline transition-transform duration-100 hover:-translate-y-2"
                       style={{ backgroundColor: C.panel }}
                     >
@@ -663,13 +664,13 @@ function App() {
                         className="font-pixel text-sm leading-relaxed mb-3"
                         style={{ color: C.yellow }}
                       >
-                        {project.title}
+                        {project.name}
                       </h3>
                       <p
                         className="font-retro text-lg leading-snug mb-4"
                         style={{ color: C.text, opacity: 0.85 }}
                       >
-                        {project.desc}
+                        {project.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((t, i) => (
