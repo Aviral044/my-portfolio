@@ -1,0 +1,56 @@
+name: New experience
+description: Add a role to the portfolio timeline
+title: "Add experience: "
+labels: ["new-experience"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The content agent opens a PR adding one entry to
+        `src/data/experience.json`. Review the Vercel preview before merging.
+
+  - type: input
+    id: role
+    attributes:
+      label: Role
+      placeholder: Software Engineer
+    validations:
+      required: true
+
+  - type: input
+    id: company
+    attributes:
+      label: Company or institution
+      placeholder: UBS
+    validations:
+      required: true
+
+  - type: input
+    id: dates
+    attributes:
+      label: Dates
+      description: Start and end month. Write "present" if this is ongoing.
+      placeholder: 2025-06 to present
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - work
+        - education
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: What you did
+      description: >
+        Rough notes are fine — the agent turns them into 2-4 bullets. It will
+        not invent metrics, so include any numbers you want shown.
+    validations:
+      required: true

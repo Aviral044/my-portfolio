@@ -1,0 +1,48 @@
+name: New project
+description: Add a project to the portfolio from a GitHub repo
+title: "Add project: "
+labels: ["new-project"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The content agent reads this issue, pulls details from the repo and
+        opens a PR adding one entry to `src/data/projects.json`.
+        Review the Vercel preview on that PR before merging.
+
+  - type: input
+    id: repo-url
+    attributes:
+      label: Repository URL
+      description: The public GitHub repo for this project.
+      placeholder: https://github.com/Aviral044/my-project
+    validations:
+      required: true
+
+  - type: input
+    id: live-url
+    attributes:
+      label: Live URL
+      description: Deployed demo, if there is one. Leave blank to fall back to the repo homepage.
+      placeholder: https://my-project.vercel.app
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: >
+        Anything the README does not make obvious — what it does, what is
+        interesting about it, which tech to emphasise. The agent will not
+        invent metrics or claims, so put any numbers you want shown here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: featured
+    attributes:
+      label: Placement
+      options:
+        - label: Feature this project (show it first)
+          required: false
